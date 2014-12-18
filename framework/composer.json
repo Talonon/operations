@@ -1,0 +1,20 @@
+{
+    "name": "kps3/framework",
+    "description": "",
+    "authors": [
+        {
+            "name": "Andy Muth",
+            "email": "andy@kps3.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Kps3\\Framework": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
