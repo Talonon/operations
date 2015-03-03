@@ -28,14 +28,22 @@
 
       protected function getMapper() {
         if (!$this->_mapper) {
-          $class = \Config::get('framework::config.Mapper.Factory');
-          if (!$class || !class_exists($class)) {
-            throw new InternalException('Mapper Factory Not Found');
-          }
-          $callable = array($class, 'GetMapper');
+          $callable = $this->_getMapperFactory();
           $this->_mapper = $callable($this->entityType);
         }
         return $this->_mapper;
+      }
+
+      /**
+       * @return \Callable
+       * @throws InternalException
+       */
+      private function _getMapperFactory() {
+        $class = \Config::get('framework::config.Mapper.Factory');
+        if (!$class || !class_exists($class)) {
+          throw new InternalException('Mapper Factory Not Found');
+        }
+        return array($class, 'GetMapper');
       }
 
       /**
