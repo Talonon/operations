@@ -32,7 +32,8 @@
           if (!$class || !class_exists($class)) {
             throw new InternalException('Mapper Factory Not Found');
           }
-          $this->_mapper = array(\Config::get('Framework::mapper.Factory'), 'GetMapper');
+          $callable = array($class, 'GetMapper');
+          $this->_mapper = $callable($this->entityType);
         }
         return $this->_mapper;
       }
@@ -40,9 +41,8 @@
       /**
        * @return Builder
        */
-      protected
-      function getTable() {
-        return $this->getDatabase()->table($this->GetMapper()->GetTableName());
+      protected function getTable() {
+        return $this->getDatabase()->table($this->getMapper()->GetTableName());
       }
 
     }

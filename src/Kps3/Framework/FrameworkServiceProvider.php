@@ -3,6 +3,7 @@
   namespace Kps3\Framework {
 
     use Illuminate\Support\ServiceProvider;
+    use Kps3\Framework\Exceptions\InternalException;
 
     class FrameworkServiceProvider extends ServiceProvider {
 
@@ -23,6 +24,9 @@
       }
 
       public function boot() {
+        if (\Config::get('database.fetch') != \PDO::FETCH_ASSOC) {
+          throw new InternalException('database.fetch must be PDO::FETCH_ASSOC');
+        }
         $this->package('kps3/framework');
       }
 
