@@ -1,0 +1,2 @@
+
+      private $___property__;
