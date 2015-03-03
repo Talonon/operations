@@ -1,7 +1,7 @@
 <?php
-  namespace Kps3\Framework\Operations\DEM {
+  namespace Kps3\Framework\Operations\Database {
 
-    use Kps3\Framework\DEM\Context\BaseDbContext;
+    use Kps3\Framework\Context\BaseDbContext;
     use Kps3\Framework\Operations\BaseOperation;
 
     abstract class BaseDbOperation extends BaseOperation {
@@ -19,7 +19,7 @@
        * @return \Illuminate\Database\Connection
        */
       protected function getDatabase() {
-        return \DB::connection();
+        return $this->context->GetDatabase();
       }
 
     }

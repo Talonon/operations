@@ -1,5 +1,5 @@
 <?php
-  namespace Kps3\Framework\Operations\DEM {
+  namespace Kps3\Framework\Operations\Database {
 
     use Illuminate\Database\Query\Builder;
     use Kps3\Framework\Interfaces\ResultInterface;

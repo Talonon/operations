@@ -1,6 +1,6 @@
 <?php
 
-  namespace Kps3\Framework\DEM\Context {
+  namespace Kps3\Framework\Context {
 
     abstract class BaseContext {
 

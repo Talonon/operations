@@ -1,6 +1,6 @@
 <?php
 
-  namespace Kps3\Framework\DEM\Mappers {
+  namespace Kps3\Framework\Mappers {
 
     abstract class BaseMapperFactory {
 

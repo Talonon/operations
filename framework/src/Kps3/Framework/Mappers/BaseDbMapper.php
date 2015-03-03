@@ -1,19 +1,11 @@
 <?php
 
-  namespace Kps3\Framework\DEM\Mappers {
+  namespace Kps3\Framework\Mappers {
 
     use Kps3\Framework\Exceptions\InternalException;
-    use Kps3\Framework\Models\DEM\BaseEntity;
+    use Kps3\Framework\Models\BaseEntity;
 
-    abstract class BaseMapper {
-
-      /**
-       * @param array $data
-       * @return BaseEntity
-       */
-      public function BuildMultiple(array $data) {
-        return $this->BuildSingle($data);
-      }
+    abstract class BaseDbMapper extends BaseMapper {
 
       /**
        * Gets an associated array of fields that are used to create a record in the database.  The key of the array
@@ -37,12 +29,6 @@
       public function GetUpdateFields(BaseEntity $entity) {
         throw new InternalException('Not Implemented');
       }
-
-      /**
-       * @param array $data
-       * @return BaseEntity
-       */
-      abstract public function BuildSingle(array $data);
 
       abstract public function GetTableName();
 

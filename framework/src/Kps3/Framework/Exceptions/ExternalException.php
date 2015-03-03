@@ -2,7 +2,7 @@
 
   namespace Kps3\Framework\Exceptions {
 
-    class ExternalException extends \Exception {
+    class ExternalException extends InternalException {
 
     }
 

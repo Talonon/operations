@@ -1,5 +1,5 @@
 <?php
-  namespace Kps3\Framework\Models\DEM {
+  namespace Kps3\Framework\Models {
 
     abstract class BaseEntity {
       private $_id;

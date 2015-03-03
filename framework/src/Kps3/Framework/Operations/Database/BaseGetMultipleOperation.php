@@ -1,7 +1,7 @@
 <?php
-  namespace Kps3\Framework\Operations\DEM {
+  namespace Kps3\Framework\Operations\Database {
 
-    use Kps3\Framework\DEM\Context\BaseDbContext;
+    use Kps3\Framework\Context\BaseDbContext;
     use Kps3\Framework\Models\BaseSearchParams;
 
     abstract class BaseGetMultipleOperation extends BaseGetOperation {

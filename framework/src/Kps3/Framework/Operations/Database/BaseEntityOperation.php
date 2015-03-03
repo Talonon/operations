@@ -1,10 +1,11 @@
 <?php
-  namespace Kps3\Framework\Operations\DEM {
+  namespace Kps3\Framework\Operations\Database {
 
     use Illuminate\Database\Query\Builder;
-    use Kps3\Framework\DEM\Context\BaseDbContext;
-    use Kps3\Framework\DEM\Mappers\BaseMapper;
-    use Kps3\Framework\Models\DEM\BaseEntity;
+    use Kps3\Framework\Context\BaseDbContext;
+    use Kps3\Framework\Mappers\BaseDbMapper;
+    use Kps3\Framework\Mappers\BaseMapper;
+    use Kps3\Framework\Models\BaseEntity;
 
     abstract class BaseEntityOperation extends BaseDbOperation {
       public function __construct(BaseDbContext $context, BaseEntity $entity) {
@@ -15,7 +16,7 @@
       }
 
       /**
-       * @var BaseMapper
+       * @var BaseDbMapper
        */
       protected $mapper;
 

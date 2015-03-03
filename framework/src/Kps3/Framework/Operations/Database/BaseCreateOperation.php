@@ -1,5 +1,5 @@
 <?php
-  namespace Kps3\Framework\Operations\DEM {
+  namespace Kps3\Framework\Operations\Database {
 
     abstract class BaseCreateOperation extends BaseEntityOperation {
 
