@@ -24,8 +24,9 @@
 
       protected function buildResult(array $rows) {
         $result = [];
+        $mapper = $this->GetMapper();
         for ($x = 0, $c = count($rows); $x < $c; $x++) {
-          $result[] = $this->mapper->BuildMultiple($rows[$x]);
+          $result[] = $mapper->BuildMultiple($rows[$x]);
         }
         $this->result = $result;
       }

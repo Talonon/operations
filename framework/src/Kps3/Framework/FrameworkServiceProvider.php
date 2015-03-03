@@ -19,7 +19,11 @@
        * @return void
        */
       public function register() {
-        //
+
+      }
+
+      public function boot() {
+        $this->package('kps3/framework');
       }
 
       /**

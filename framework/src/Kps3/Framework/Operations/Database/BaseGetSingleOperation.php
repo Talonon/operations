@@ -18,14 +18,14 @@
       protected $id;
 
       protected function buildQuery(Builder $select) {
-        $select->where($this->mapper->GetTableName() . '.' . $this->mapper->GetPrimaryKey(), $this->id);
+        $select->where($this->GetMapper()->GetTableName() . '.' . $this->GetMapper()->GetPrimaryKey(), $this->id);
       }
 
       protected function buildResult(array $rows) {
         if (count($rows) == 0) {
           throw new EntityNotFoundException($this->entityType, $this->id);
         }
-        $this->result = $this->mapper->BuildSingle($rows[0]);
+        $this->result = $this->GetMapper()->BuildSingle($rows[0]);
       }
     }
   }

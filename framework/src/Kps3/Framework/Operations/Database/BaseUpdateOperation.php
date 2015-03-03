@@ -18,8 +18,8 @@
 
       protected function doExecute() {
         $this->getTable()
-             ->where($this->mapper->GetPrimaryKey(), $this->entity->GetId())
-             ->update($this->mapper->GetUpdateFields($this->entity));
+             ->where($this->GetMapper()->GetPrimaryKey(), $this->entity->GetId())
+             ->update($this->GetMapper()->GetUpdateFields($this->entity));
       }
     }
   }
