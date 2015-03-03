@@ -29,7 +29,8 @@
 
       protected function getMapper() {
         if (!$this->_mapper) {
-          $class = \Config::get('Framework::mapper.Factory');
+          $class = \Config::get('framework::mapper.Factory');
+          print $class;die;
           if (!$class || !class_exists($class)) {
             throw new InternalException('Mapper Factory Not Found');
           }
