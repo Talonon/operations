@@ -1,6 +1,7 @@
 <?php
   namespace Kps3\Framework\Operations\Database {
 
+    use Illuminate\Support\Collection;
     use Kps3\Framework\Context\BaseDbContext;
     use Kps3\Framework\Models\BaseSearchParams;
 
@@ -16,6 +17,13 @@
        */
       protected $params;
 
+      /**
+       * @return Collection
+       */
+      public function GetResult() {
+        return $this->result;
+      }
+
       protected function doExecute() {
         $select = $this->getTable();
         $this->buildQuery($select);
@@ -23,13 +31,12 @@
       }
 
       protected function buildResult(array $rows) {
-        $result = [];
+        $result = new Collection();
         $mapper = $this->GetMapper();
         for ($x = 0, $c = count($rows); $x < $c; $x++) {
           $result[] = $mapper->BuildMultiple($rows[$x]);
         }
         $this->result = $result;
       }
-
     }
   }
