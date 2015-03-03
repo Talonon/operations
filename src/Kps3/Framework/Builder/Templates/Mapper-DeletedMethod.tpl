@@ -1,7 +1,7 @@
 
-      /**
-      * @return string
-      */
-      public function GetDeletedColumnName() {
-        return '__DELETED_COLUMN__';
-      }
+    /**
+    * @return string
+    */
+    public function GetDeletedColumnName() {
+      return '__DELETED_COLUMN__';
+    }

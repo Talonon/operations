@@ -41,9 +41,9 @@
       }
 
       private function _getDeleteMethod() {
-        $template = file_get_contents(dirname(__FILE__) . '/Templates/Mapper-DeleteMethod.tpl');
+        $template = file_get_contents(dirname(__FILE__) . '/Templates/Mapper-DeletedMethod.tpl');
         return str_replace(
-          '__DELETE_COLUMN_NAME__',
+          '__DELETED_COLUMN__',
           self::getConfig('softDeleteColumn')
           , $template);
       }
