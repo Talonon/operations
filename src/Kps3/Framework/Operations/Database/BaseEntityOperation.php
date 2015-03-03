@@ -4,6 +4,7 @@
     use Illuminate\Database\Query\Builder;
     use Kps3\Framework\Context\BaseDbContext;
     use Kps3\Framework\Exceptions\InternalException;
+    use Kps3\Framework\Interfaces\SoftDeleteMapperInterface;
     use Kps3\Framework\Mappers\BaseDbMapper;
     use Kps3\Framework\Models\BaseEntity;
 
@@ -26,10 +27,18 @@
 
       protected $entityType;
 
+      /**
+       * @return BaseDbMapper|SoftDeleteMapperInterface
+       * @throws InternalException
+       */
       protected function getMapper() {
         if (!$this->_mapper) {
           $callable = $this->_getMapperFactory();
-          $this->_mapper = $callable($this->entityType);
+          $mapper = $callable($this->entityType);
+          if (!$mapper instanceof SoftDeleteMapperInterface) {
+            throw new InternalException('Mapper for ' . $this->entityType . ' must implement SoftDeleteMapperInterface.');
+          }
+          $this->_mapper = $mapper;
         }
         return $this->_mapper;
       }

@@ -1,8 +1,11 @@
 <?php
   namespace Kps3\Framework\Operations\Database {
 
+    use Illuminate\Database\Eloquent\SoftDeletingTrait;
+    use Illuminate\Database\Query\Builder;
     use Illuminate\Support\Collection;
     use Kps3\Framework\Context\BaseDbContext;
+    use Kps3\Framework\Interfaces\SoftDeletableEntityInterface;
     use Kps3\Framework\Models\BaseSearchParams;
 
     abstract class BaseGetMultipleOperation extends BaseGetOperation {
@@ -22,6 +25,12 @@
        */
       public function GetResult() {
         return $this->result;
+      }
+
+      protected function buildQuery(Builder $builder) {
+        if ($this->entity instanceof SoftDeletableEntityInterface) {
+          $builder->where($this->getMapper()->GetDeletedColumnName(), 0);
+        }
       }
 
       protected function doExecute() {

@@ -19,7 +19,11 @@
       protected function doExecute() {
         $this->getTable()
              ->where($this->GetMapper()->GetPrimaryKey(), $this->entity->GetId())
-             ->update($this->GetMapper()->GetUpdateFields($this->entity));
+             ->update($this->getFields());
+      }
+
+      protected function getFields() {
+        return $this->GetMapper()->GetUpdateFields($this->entity);
       }
     }
   }
