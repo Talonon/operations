@@ -29,11 +29,11 @@
       protected function getNamespace($type = null, $useEntityNamespace = null) {
         $type = is_null($type) ? $this->getType() : $type;
         $useEntityNamespace = is_null($useEntityNamespace) ? $this->usesEntityNamespace() : $useEntityNamespace;
-        return \Config::get('framework::EntityBuilder.BaseNamespace') . '\\' . Pluralizer::plural($type) . ($useEntityNamespace ? '\\' . self::getConfig('namespace') : '');
+        return \Config::get('framework::entity_builder.base_namespace') . '\\' . Pluralizer::plural($type) . ($useEntityNamespace ? '\\' . self::getConfig('namespace') : '');
       }
 
       protected function getFilename() {
-        $file = \Config::get('framework::EntityBuilder.SrcDirectory', storage_path('entity-builder'));
+        $file = \Config::get('framework::entity_builder.src_directory', storage_path('entity-builder'));
         return rtrim($file, '/') . '/' . Pluralizer::plural($this->getType()) . '/' . ($this->usesEntityNamespace() ? self::getConfig('namespace') . '/' : '') . $this->getClassName() . '.php';
       }
 

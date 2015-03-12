@@ -39,7 +39,7 @@
        * @throws InternalException
        */
       public static function GetMapperClassName() {
-        $class = \Config::get('framework::config.mapper.factory');
+        $class = \Config::get('framework::mapper.factory');
         if (!$class || !class_exists($class)) {
           throw new InternalException('Mapper Factory Not Found');
         }

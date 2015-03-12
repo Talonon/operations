@@ -125,19 +125,19 @@
         BaseBuilder::SetDefaults($this->_config);
         $this->_builders['Models'][] = new EntityBuilder();
         $this->_builders['Mappers'][] = new MapperBuilder();
-        $this->_config['getList'] && $this->_builders['Models'][] = new SearchParamsBuilder();
-        $this->_config['get'] && $this->_builders['Operations'][] = new GetOperationBuilder();
-        $this->_config['getList'] && $this->_builders['Operations'][] = new GetListOperationBuilder();
-        $this->_config['create'] && $this->_builders['Operations'][] = new CreateOperationBuilder();
-        $this->_config['update'] && $this->_builders['Operations'][] = new UpdateOperationBuilder();
-        $this->_config['delete'] && $this->_builders['Operations'][] = new DeleteOperationBuilder();
-        $this->_config['softDelete'] && $this->_builders['Operations'][] = new SoftDeleteOperationBuilder();
-        $this->_config['get'] && $this->_builders['Traits'][] = new GetTraitBuilder();
-        $this->_config['getList'] && $this->_builders['Traits'][] = new GetListTraitBuilder();
-        $this->_config['create'] && $this->_builders['Traits'][] = new CreateTraitBuilder();
-        $this->_config['update'] && $this->_builders['Traits'][] = new UpdateTraitBuilder();
-        $this->_config['delete'] && $this->_builders['Traits'][] = new DeleteTraitBuilder();
-        $this->_config['softDelete'] && $this->_builders['Traits'][] = new SoftDeleteTraitBuilder();
+        $this->_config['getList'] && ($this->_builders['Models'][] = new SearchParamsBuilder());
+        $this->_config['get'] && ($this->_builders['Operations'][] = new GetOperationBuilder());
+        $this->_config['getList'] && ($this->_builders['Operations'][] = new GetListOperationBuilder());
+        $this->_config['create'] && ($this->_builders['Operations'][] = new CreateOperationBuilder());
+        $this->_config['update'] && ($this->_builders['Operations'][] = new UpdateOperationBuilder());
+        $this->_config['delete'] && ($this->_builders['Operations'][] = new DeleteOperationBuilder());
+        $this->_config['softDelete'] && ($this->_builders['Operations'][] = new SoftDeleteOperationBuilder());
+        $this->_config['get'] && ($this->_builders['Traits'][] = new GetTraitBuilder());
+        $this->_config['getList'] && ($this->_builders['Traits'][] = new GetListTraitBuilder());
+        $this->_config['create'] && ($this->_builders['Traits'][] = new CreateTraitBuilder());
+        $this->_config['update'] && ($this->_builders['Traits'][] = new UpdateTraitBuilder());
+        $this->_config['delete'] && ($this->_builders['Traits'][] = new DeleteTraitBuilder());
+        $this->_config['softDelete'] && ($this->_builders['Traits'][] = new SoftDeleteTraitBuilder());
       }
 
       private function _build() {
@@ -167,15 +167,6 @@
           $this->error('User cancelled.');
           die;
         }
-      }
-
-      private function _getNamespace($type, $entityNS = true) {
-        return \Config::get('framework::EntityBuilder.BaseNamespace') . '\\' . Pluralizer::plural($type) . ($entityNS ? '\\' . $this->_config['namespace'] : '');
-      }
-
-      private function _getFilename($base, $type, $entityDir = true) {
-        $file = \Config::get('framework::EntityBuilder.SrcDirectory', storage_path('entity-builder'));
-        return rtrim($file, '/') . '/' . Pluralizer::plural($type) . '/' . ($entityDir ? $this->_config['namespace'] . '/' : '') . $base . '.php';
       }
 
       private function _ask($question, $default = 'yes', $options = array('yes', 'no')) {
