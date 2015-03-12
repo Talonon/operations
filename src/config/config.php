@@ -1,6 +1,17 @@
 <?php
   return array(
-    'Mapper' => [
-      'Factory' => null,
+    'mapper'   => [
+      'factory' => null,
+    ],
+    'metadata' => [
+      'default' => [
+        'title'       => 'View',
+        'description' => 'A Default View',
+        'image'       => ''
+      ],
+      'title' => [
+        'prefix' => 'Page - ',
+        'suffix' => ' | A KPS3 Framework Application'
+      ]
     ]
   );

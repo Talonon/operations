@@ -1,6 +1,6 @@
 <?php
 
-  namespace Kps3\Framework\Operations\Presenters {
+  namespace Kps3\Framework\Presenters {
 
     trait PresentableTrait {
 

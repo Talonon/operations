@@ -6,6 +6,7 @@
     use Kps3\Framework\Exceptions\InternalException;
     use Kps3\Framework\Interfaces\SoftDeleteMapperInterface;
     use Kps3\Framework\Mappers\BaseDbMapper;
+    use Kps3\Framework\Mappers\BaseMapperFactory;
     use Kps3\Framework\Models\BaseEntity;
 
     abstract class BaseEntityOperation extends BaseDbOperation {
@@ -48,11 +49,7 @@
        * @throws InternalException
        */
       private function _getMapperFactory() {
-        $class = \Config::get('framework::config.Mapper.Factory');
-        if (!$class || !class_exists($class)) {
-          throw new InternalException('Mapper Factory Not Found');
-        }
-        return array($class, 'GetMapper');
+        return array(BaseMapperFactory::GetMapperClassName(), 'GetMapper');
       }
 
       /**
