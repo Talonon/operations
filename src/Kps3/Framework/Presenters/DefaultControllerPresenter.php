@@ -18,7 +18,7 @@
 
 
       protected function formatTitle($title) {
-        return trim(\Config::get('framework::config.metadata.title.prefix') . ' ' . $title . ' ' . \Config::get('framework::config.metadata.title.suffix'));
+        return trim(\Config::get('framework::config.metadata.title.prefix') . $title . \Config::get('framework::config.metadata.title.suffix'));
       }
     }
 
