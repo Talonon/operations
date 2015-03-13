@@ -24,6 +24,7 @@
             'created_date' => \Carbon::now()
           ];
         }
+        return $fields;
       }
 
       /**
@@ -42,12 +43,23 @@
             'modified_date' => \Carbon::now()
           ];
         }
+        return $fields;
       }
 
+      /**
+       * @param BaseEntity $entity
+       * @returns array
+       * @throws InternalException
+       */
       protected function doGetUpdateFields(BaseEntity $entity) {
         throw new InternalException('Not Implemented');
       }
 
+      /**
+       * @param BaseEntity $entity
+       * @returns array
+       * @throws InternalException
+       */
       protected function doGetCreateFields(BaseEntity $entity) {
         throw new InternalException('Not Implemented');
       }
