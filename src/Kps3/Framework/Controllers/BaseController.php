@@ -40,19 +40,19 @@
       }
 
       protected function getBoolean($key, $required = false) {
-        return $this->_get($key, $required, function($key) {
+        return $this->_get(
+          $key, $required, function ($key) {
           $input = \Input::get($key);
           if ($input == null) return null;
           $input = strtolower($input);
           switch ($input) {
-            case $input === 1:
-            case $input === '1':
+            case 1:
+            case '1':
             case 'true':
             case 'on':
             case 'yes':
             case 'y':
               return true;
-              break;
             case $input === 0:
             case $input === '0':
             case 'false':
