@@ -45,8 +45,8 @@
           if ($input == null) return null;
           $input = strtolower($input);
           switch ($input) {
-            case $input == true:
-            case $input == 1:
+            case $input === 1:
+            case $input === '1':
             case 'true':
             case 'on':
             case 'yes':
