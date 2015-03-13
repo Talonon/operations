@@ -1,8 +1,5 @@
 <?php
   namespace Kps3\Framework\Controllers {
-    use Giving\Models\ApplicationException;
-    use Giving\Models\Context\BaseContext;
-    use Giving\Models\Exceptions\UploadException;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -108,7 +105,6 @@
       /**
        * Responds to the client that there was an error.  Includes a message to display to the user.
        * @param $message string or Array of strings.
-       * @throws GivingException If the message is not an array or a string.
        */
       protected function respondError($message, $statusCode = 500) {
         $this->ensureXHR();
