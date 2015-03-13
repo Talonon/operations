@@ -43,7 +43,7 @@
         $this->_settings['_csrf'] = csrf_token();
         $data['Settings'] = json_encode($this->_settings);
         !isset($data['Layout']) && $data['Layout'] = $this->wrapper;
-        $data['Page'] = $this->presenter;
+        $data['Page'] = $this->Present();
         $data = array_merge($this->_data, $data);
         return \View::make($view, $data);
       }
