@@ -90,7 +90,7 @@
         if ($required && !\Input::has($key)) {
           $this->_badRequest($key);
         }
-        $callback($key, $required);
+        return $callback($key, $required);
       }
     }
 
