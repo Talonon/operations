@@ -6,7 +6,7 @@
     /**
      * Sets up the basic most methods used by all of the Ajax controllers.
      */
-    abstract class BaseAjaxController extends BaseController {
+    abstract class BaseJsonController extends BaseController {
 
       public function __construct() {
         $this->_isXHR = \Request::ajax();
