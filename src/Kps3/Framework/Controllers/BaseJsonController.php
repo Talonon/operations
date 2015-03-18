@@ -14,10 +14,17 @@
 
       private $_isXHR;
       protected $checkXHR = true;
+      protected $resultCode = 200;
 
       protected function dispatch(callable $delegate) {
         try {
-          return $delegate();
+          $result = $delegate();
+          if (is_array($result) || $result instanceof \JsonSerializable) {
+            return $this->respondObject($result,  $this->resultCode);
+          }
+          else {
+            return $this->respondJSON($result, $this->resultCode);
+          }
         } catch (\Exception $ex) {
           return $this->dispatcherError($ex);
         }
