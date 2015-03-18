@@ -16,7 +16,7 @@
 
       /**
        * Gets an instance of the mapper object for the class identified by className.  A Mapper Factory
-       * must be configured in the config.php in the project.
+       * must be configured in the kps3framework.php in the project.
        * @param $className
        * @return mixed
        * @throws InternalException
@@ -39,7 +39,7 @@
        * @throws InternalException
        */
       public static function GetMapperClassName() {
-        $class = \Config::get('framework::mapper.factory');
+        $class = \Config::get('kps3framework.mapper.factory');
         if (!$class || !class_exists($class)) {
           throw new InternalException('Mapper Factory Not Found');
         }

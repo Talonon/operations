@@ -13,12 +13,12 @@
       protected $model;
 
       public function GetTitle() {
-        return $this->formatTitle(isset($this->model->GetValue('Metadata')[MetadataEnum::TITLE]) ? $this->model->GetValue('Metadata')[MetadataEnum::TITLE] : \Config::get('framework::config.metadata.default.title'));
+        return $this->formatTitle(isset($this->model->GetValue('Metadata')[MetadataEnum::TITLE]) ? $this->model->GetValue('Metadata')[MetadataEnum::TITLE] : \Config::get('kps3framework.metadata.default.title'));
       }
 
 
       protected function formatTitle($title) {
-        return trim(\Config::get('framework::config.metadata.title.prefix') . $title . \Config::get('framework::config.metadata.title.suffix'));
+        return trim(\Config::get('kps3framework.metadata.title.prefix') . $title . \Config::get('kps3framework.metadata.title.suffix'));
       }
     }
 
