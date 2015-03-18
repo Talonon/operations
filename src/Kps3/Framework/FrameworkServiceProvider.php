@@ -39,7 +39,6 @@
         if (\Config::get('database.fetch') != \PDO::FETCH_ASSOC) {
           throw new InternalException('database.fetch must be PDO::FETCH_ASSOC');
         }
-        $this->package('kps3/framework');
       }
 
       /**
