@@ -4,6 +4,7 @@
     use Kps3\Framework\Exceptions\EntityNotFoundException;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+    use Symfony\Component\HttpKernel\Exception\HttpException;
 
     /**
      * Sets up the basic most methods used by all of the Ajax controllers.
@@ -29,7 +30,11 @@
           }
         } catch (EntityNotFoundException $enfe) {
           return $this->respondError($enfe->getMessage(), 404);
-        } catch (\Exception $ex) {
+        }
+        catch (HttpException $hex) {
+          return $this->respondError($hex->getMessage(), $hex->getStatusCode());
+        }
+        catch (\Exception $ex) {
           return $this->dispatcherError($ex);
         }
       }
