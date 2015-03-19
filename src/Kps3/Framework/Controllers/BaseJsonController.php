@@ -28,7 +28,7 @@
             return $this->respondJSON($result, $this->resultCode);
           }
         } catch (EntityNotFoundException $enfe) {
-          $this->respondError($enfe->getMessage(), 404);
+          return $this->respondError($enfe->getMessage(), 404);
         } catch (\Exception $ex) {
           return $this->dispatcherError($ex);
         }
