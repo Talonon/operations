@@ -120,7 +120,8 @@
       protected function respondError($message, $statusCode = 500) {
         $this->ensureXHR();
         $data['success'] = false;
-        $message && ($data['message'] = $message);
+        $data['statusCode'] = $statusCode;
+        $message && ($data['error'] = $message);
         return $this->respondObject($data, $statusCode);
       }
 
