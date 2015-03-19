@@ -1,5 +1,6 @@
 <?php
   namespace Kps3\Framework\Controllers {
+    use Illuminate\Http\Response;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -19,11 +20,14 @@
       protected function dispatch(callable $delegate) {
         try {
           $result = $delegate();
-          if (is_array($result) || $result instanceof \JsonSerializable) {
+          if ($result instanceof Response) {
+            return $result;
+          }
+          else if (is_array($result) || $result instanceof \JsonSerializable) {
             return $this->respondObject($result,  $this->resultCode);
           }
           else {
-            return $this->respondJSON($result, $this->resultCode);
+            return $this->respondJSON($result, $this->resul);
           }
         } catch (\Exception $ex) {
           return $this->dispatcherError($ex);
