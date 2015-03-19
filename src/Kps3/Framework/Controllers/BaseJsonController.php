@@ -1,6 +1,7 @@
 <?php
   namespace Kps3\Framework\Controllers {
     use Illuminate\Http\Response;
+    use Kps3\Framework\Exceptions\EntityNotFoundException;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -12,23 +13,22 @@
       public function __construct() {
         $this->_isXHR = \Request::ajax();
       }
-
-      private $_isXHR;
       protected $checkXHR = true;
       protected $resultCode = 200;
+      private $_isXHR;
 
       protected function dispatch(callable $delegate) {
         try {
           $result = $delegate();
           if ($result instanceof Response) {
             return $result;
+          } else if (is_array($result) || $result instanceof \JsonSerializable) {
+            return $this->respondObject($result, $this->resultCode);
+          } else {
+            return $this->respondJSON($result, $this->resultCode);
           }
-          else if (is_array($result) || $result instanceof \JsonSerializable) {
-            return $this->respondObject($result,  $this->resultCode);
-          }
-          else {
-            return $this->respondJSON($result, $this->resul);
-          }
+        } catch (EntityNotFoundException $enfe) {
+          $this->respondError($enfe->getMessage(), 404);
         } catch (\Exception $ex) {
           return $this->dispatcherError($ex);
         }
