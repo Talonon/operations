@@ -2,6 +2,7 @@
   namespace Kps3\Framework\Controllers {
     use Illuminate\Http\Response;
     use Kps3\Framework\Exceptions\EntityNotFoundException;
+    use Kps3\Framework\Exceptions\ExternalException;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
     use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -28,8 +29,12 @@
           } else {
             return $this->respondJSON($result, $this->resultCode);
           }
-        } catch (EntityNotFoundException $enfe) {
-          return $this->respondError($enfe->getMessage(), 404);
+        }
+        catch (ExternalException $eex) {
+          return $this->respondError($eex->getMessage(), 400);
+        }
+        catch (EntityNotFoundException $enfex) {
+          return $this->respondError($enfex->getMessage(), 404);
         }
         catch (HttpException $hex) {
           return $this->respondError($hex->getMessage(), $hex->getStatusCode());
@@ -43,7 +48,7 @@
         $debug = \Config::get('app.debug', false);
         $message = $debug ? $ex->getMessage() : 'Unexpected error occurred.';
         if ($this->_isXHR) {
-          return $this->respondError($message);
+          return $this->respondError($message, 500);
         } else {
           \App::abort(500, $message);
         }
