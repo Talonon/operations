@@ -1,7 +1,7 @@
 <?php
 
 
-  namespace Kps3\Models {
+  namespace Kps3\Framework\Models {
 
     use Kps3\Framework\Exceptions\InternalException;
 
