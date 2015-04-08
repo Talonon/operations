@@ -11,7 +11,7 @@
 
       protected function addHeader($key, $value, $replace = false) {
         $key = strtolower($key);
-        if ((!$replace && array_key_exists($key, $this->headers)) || $replace) {
+        if ((!$replace && !array_key_exists($key, $this->headers)) || $replace) {
           $this->headers[$key] = $value;
         }
       }
