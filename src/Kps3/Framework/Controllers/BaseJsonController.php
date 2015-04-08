@@ -16,6 +16,7 @@
       public function __construct() {
         $this->_isXHR = \Request::ajax();
       }
+
       protected $checkXHR = true;
       protected $resultCode = SymphonyResponse::HTTP_OK;
       private $_isXHR;
@@ -89,9 +90,8 @@
        */
       protected function respondJSON($json, $statusCode = SymphonyResponse::HTTP_OK) {
         $this->ensureXHR();
-        $response = \Response::make($json, $statusCode, $this->headers);
-        $response->header('Content-Type', 'application/json');
-        return $response;
+        $this->addHeader('Content-Type', 'application/json', true);
+        return new Response($json, $statusCode, $this->headers);
       }
 
       /**
