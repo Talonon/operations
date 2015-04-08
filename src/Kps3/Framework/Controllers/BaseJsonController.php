@@ -6,6 +6,7 @@
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
     use Symfony\Component\HttpKernel\Exception\HttpException;
+    use \Symfony\Component\HttpFoundation\Response as SymphonyResponse;
 
     /**
      * Sets up the basic most methods used by all of the Ajax controllers.
@@ -16,7 +17,7 @@
         $this->_isXHR = \Request::ajax();
       }
       protected $checkXHR = true;
-      protected $resultCode = 200;
+      protected $resultCode = SymphonyResponse::HTTP_OK;
       private $_isXHR;
 
       protected function dispatch(callable $delegate) {
@@ -31,10 +32,10 @@
           }
         }
         catch (ExternalException $eex) {
-          return $this->respondError($eex->getMessage(), 400);
+          return $this->respondError($eex->getMessage(), SymphonyResponse::HTTP_BAD_REQUEST);
         }
         catch (EntityNotFoundException $enfex) {
-          return $this->respondError($enfex->getMessage(), 404);
+          return $this->respondError($enfex->getMessage(), SymphonyResponse::HTTP_NOT_FOUND);
         }
         catch (HttpException $hex) {
           return $this->respondError($hex->getMessage(), $hex->getStatusCode());
@@ -48,9 +49,9 @@
         $debug = \Config::get('app.debug', false);
         $message = $debug ? $ex->getMessage() : 'Unexpected error occurred.';
         if ($this->_isXHR) {
-          return $this->respondError($message, 500);
+          return $this->respondError($message, SymphonyResponse::HTTP_INTERNAL_SERVER_ERROR);
         } else {
-          \App::abort(500, $message);
+          \App::abort(SymphonyResponse::HTTP_INTERNAL_SERVER_ERROR, $message);
         }
       }
 
@@ -76,7 +77,7 @@
        * @param $entity Array or Object
        * @param $statusCode int Any valid HTTP Response code.
        */
-      protected function respondObject($entity, $statusCode = 200) {
+      protected function respondObject($entity, $statusCode = \Symfony\Component\HttpFoundation\Response::HTTP_OK) {
         $this->ensureXHR();
         return $this->respondJSON(json_encode($entity), $statusCode);
       }
@@ -86,9 +87,9 @@
        * @param $json string A JSON encoded string.
        * @param int $statusCode Any valid HTTP Response status code.  200, 404, 403 etc.
        */
-      protected function respondJSON($json, $statusCode = 200) {
+      protected function respondJSON($json, $statusCode = SymphonyResponse::HTTP_OK) {
         $this->ensureXHR();
-        $response = \Response::make($json, $statusCode);
+        $response = \Response::make($json, $statusCode, $this->headers);
         $response->header('Content-Type', 'application/json');
         return $response;
       }
@@ -99,7 +100,7 @@
        * @param int $statusCode
        * @return mixed
        */
-      protected function respondList($list, $count = null, $total = null, $statusCode = 200) {
+      protected function respondList($list, $count = null, $total = null, $statusCode = SymphonyResponse::HTTP_OK) {
         $this->ensureXHR();
         return $this->respondObject(
           [

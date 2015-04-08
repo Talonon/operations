@@ -7,6 +7,15 @@
 
     abstract class BaseController extends Controller {
 
+      protected $headers = [];
+
+      protected function addHeader($key, $value, $replace = false) {
+        $key = strtolower($key);
+        if ((!$replace && array_key_exists($key, $this->headers)) || $replace) {
+          $this->headers[$key] = $value;
+        }
+      }
+
       protected function getString($key, $required = false) {
         return $this->_get($key, $required, function($key) {
           return \Input::get($key);
