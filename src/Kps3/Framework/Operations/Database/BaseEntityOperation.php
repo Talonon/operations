@@ -19,7 +19,7 @@
       /**
        * @var BaseDbMapper
        */
-      private $_mapper;
+      private static $_mapper;
 
       /**
        * @var BaseEntity
@@ -33,23 +33,14 @@
        * @throws InternalException
        */
       protected function getMapper() {
-        if (!$this->_mapper) {
-          $callable = $this->_getMapperFactory();
-          $mapper = $callable($this->entityType);
+        if (!self::$_mapper) {
+          $mapper = \App::make($this->entityType . '.Mapper');
           if (!$mapper instanceof SoftDeleteMapperInterface) {
             throw new InternalException('Mapper for ' . $this->entityType . ' must implement SoftDeleteMapperInterface.');
           }
-          $this->_mapper = $mapper;
+          self::$_mapper = $mapper;
         }
-        return $this->_mapper;
-      }
-
-      /**
-       * @return \Callable
-       * @throws InternalException
-       */
-      private function _getMapperFactory() {
-        return array(BaseMapperFactory::GetMapperClassName(), 'GetMapper');
+        return self::$_mapper;
       }
 
       /**
