@@ -12,7 +12,7 @@ use Illuminate\Support\ServiceProvider;
  *
  * 'App\Providers\MapperServiceProvider',
  *
- * Remember if you change your "App" namespace, "App" will need to be changed, and if you chagne the name of the service
+ * Remember if you change your "App" namespace, "App" will need to be changed. If you change the name of the service
  * provider class "MapperServiceProvider" should be changed above as well.
  */
 class MapperServiceProvider extends ServiceProvider {
