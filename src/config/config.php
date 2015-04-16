@@ -1,8 +1,5 @@
 <?php
   return array(
-    'mapper'   => [
-      'factory' => null,
-    ],
     'metadata' => [
       'default' => [
         'title'       => 'View',
