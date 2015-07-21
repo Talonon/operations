@@ -37,16 +37,18 @@
       protected function doExecute() {
         $select = $this->getTable();
         $this->buildQuery($select);
-        $this->buildResult($select->get());
+        $this->rows = $select->get();
+        $this->buildResult();
       }
 
-      protected function buildResult(array $rows) {
+      protected function buildResult() {
         $result = new Collection();
         $mapper = $this->GetMapper();
-        for ($x = 0, $c = count($rows); $x < $c; $x++) {
-          $result[] = $mapper->BuildMultiple($rows[$x]);
+        for ($x = 0, $c = count($this->rows); $x < $c; $x++) {
+          $result[] = $mapper->BuildMultiple($this->rows[$x]);
         }
         $this->result = $result;
+        unset($this->rows);
       }
     }
   }

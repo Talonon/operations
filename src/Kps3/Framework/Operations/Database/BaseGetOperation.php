@@ -11,16 +11,18 @@
        * @var mixed
        */
       protected $result;
+      protected $rows;
 
       protected function doExecute() {
         $select = $this->getTable();
         $this->buildQuery($select);
-        $this->buildResult($select->get());
+        $this->rows = $select->get();
+        $this->buildResult();
       }
 
       protected abstract function buildQuery(Builder $select);
 
-      protected abstract function buildResult(array $rows);
+      protected abstract function buildResult();
 
       public function GetResult() {
         return $this->result;

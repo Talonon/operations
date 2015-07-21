@@ -21,11 +21,12 @@
         $select->where($this->GetMapper()->GetTableName() . '.' . $this->GetMapper()->GetPrimaryKey(), $this->id);
       }
 
-      protected function buildResult(array $rows) {
-        if (count($rows) == 0) {
+      protected function buildResult() {
+        if (count($this->rows) == 0) {
           throw new EntityNotFoundException($this->entityType, $this->id);
         }
-        $this->result = $this->GetMapper()->BuildSingle($rows[0]);
+        $this->result = $this->GetMapper()->BuildSingle($this->rows[0]);
+        unset($this->rows);
       }
     }
   }
