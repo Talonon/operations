@@ -46,7 +46,7 @@
         $mapper = $this->GetMapper();
         for ($x = 0, $c = count($this->rows); $x < $c; $x++) {
           $row = $this->rows[$x];
-          $row = is_object($row) ? get_class_vars($row) : $row;
+          $row = is_object($row) ? get_object_vars($row) : $row;
           $result[] = $mapper->BuildMultiple($row);
         }
         $this->result = $result;
