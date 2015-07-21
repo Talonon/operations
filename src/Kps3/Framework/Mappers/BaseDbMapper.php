@@ -2,6 +2,7 @@
 
   namespace Kps3\Framework\Mappers {
 
+    use Carbon\Carbon;
     use Kps3\Framework\Exceptions\InternalException;
     use Kps3\Framework\Interfaces\TimestampsInterface;
     use Kps3\Framework\Models\BaseEntity;
@@ -20,8 +21,8 @@
         $fields = $this->doGetCreateFields($entity);
         if ($entity instanceof TimestampsInterface) {
           $fields += [
-            'updated_at' => \Carbon::now(),
-            'created_at' => \Carbon::now()
+            'updated_at' => Carbon::now(),
+            'created_at' => Carbon::now()
           ];
         }
         return $fields;
@@ -40,7 +41,7 @@
         $fields = $this->doGetUpdateFields($entity);
         if ($entity instanceof TimestampsInterface) {
           $fields += [
-            'updated_at' => \Carbon::now()
+            'updated_at' => Carbon::now()
           ];
         }
         return $fields;
