@@ -45,7 +45,9 @@
         $result = new Collection();
         $mapper = $this->GetMapper();
         for ($x = 0, $c = count($this->rows); $x < $c; $x++) {
-          $result[] = $mapper->BuildMultiple($this->rows[$x]);
+          $row = $this->rows[$x];
+          $row = is_object($row) ? get_class_vars($row) : $row;
+          $result[] = $mapper->BuildMultiple($row);
         }
         $this->result = $result;
         unset($this->rows);

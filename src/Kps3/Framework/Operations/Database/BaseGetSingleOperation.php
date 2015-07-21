@@ -25,7 +25,8 @@
         if (count($this->rows) == 0) {
           throw new EntityNotFoundException($this->entityType, $this->id);
         }
-        $this->result = $this->GetMapper()->BuildSingle($this->rows[0]);
+        $row = $this->rows[0];
+        $this->result = $this->GetMapper()->BuildSingle(is_object($row) ? get_class_vars($row) : $row);
         unset($this->rows);
       }
     }
