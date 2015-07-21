@@ -7,8 +7,8 @@
 
     abstract class BaseGetSingleOperation extends BaseGetOperation {
 
-      public function __construct(BaseDbContext $context, $id, BaseEntity $entity) {
-        parent::__construct($context, $entity);
+      public function __construct(BaseDbContext $context, $id, $class) {
+        parent::__construct($context, $class);
         $this->id = $id;
       }
 

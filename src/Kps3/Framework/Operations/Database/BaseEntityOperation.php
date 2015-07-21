@@ -11,10 +11,9 @@
     use Kps3\Framework\Models\BaseEntity;
 
     abstract class BaseEntityOperation extends BaseDbOperation {
-      public function __construct(BaseDbContext $context, BaseEntity $entity) {
+      public function __construct(BaseDbContext $context, $class) {
         parent::__construct($context);
-        $this->entity = $entity;
-        $this->entityType = get_class($entity);
+        $this->entityType = $class;
       }
 
       /**

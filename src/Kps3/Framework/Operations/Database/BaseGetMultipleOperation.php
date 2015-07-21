@@ -11,8 +11,8 @@
 
     abstract class BaseGetMultipleOperation extends BaseGetOperation {
 
-      public function __construct(BaseDbContext $context, BaseSearchParams $params = null, $entityType) {
-        parent::__construct($context, $entityType);
+      public function __construct(BaseDbContext $context, BaseSearchParams $params = null, $class) {
+        parent::__construct($context, $class);
         $this->params = $params;
       }
 
