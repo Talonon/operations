@@ -6,6 +6,7 @@
     use Illuminate\Support\Collection;
     use Kps3\Framework\Context\BaseDbContext;
     use Kps3\Framework\Interfaces\SoftDeletableEntityInterface;
+    use Kps3\Framework\Mappers\BaseSoftDeleteDbMapper;
     use Kps3\Framework\Models\BaseSearchParams;
 
     abstract class BaseGetMultipleOperation extends BaseGetOperation {
@@ -28,8 +29,8 @@
       }
 
       protected function buildQuery(Builder $builder) {
-        if ($this->entity instanceof SoftDeletableEntityInterface) {
-          $builder->where($this->getMapper()->GetDeletedColumnName(), 0);
+        if ($this->entity instanceof BaseSoftDeleteDbMapper) {
+          $builder->whereNull($this->getMapper()->GetDeletedColumnName());
         }
       }
 

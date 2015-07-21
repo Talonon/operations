@@ -62,7 +62,7 @@
         'delete'           => false,
         'softDelete'       => false,
         'softDeleteColumn' => false,
-        'trackDates'       => false,
+        'timestamps'       => false,
         'auto-build'       => false,
       ];
 
@@ -109,7 +109,7 @@
         if ($table) {
           $this->_config['auto-build'] = $this->_askYN('Do you want to build the entity properties based on the database columns?');
           if (\Schema::hasColumn($this->_config['table'], 'created_date') && \Schema::hasColumn($this->_config['table'], 'modified_date')) {
-            $this->_config['trackDates'] = true;
+            $this->_config['timestamps'] = true;
           }
           else {
             $this->info('*** create_date and modified_date columns not found.  Entity will not track dates. ***');
@@ -117,7 +117,7 @@
         }
         else {
           $this->info('*** Table not found, auto-build is disabled. ***');
-          $this->_config['trackDates'] = $this->_askYN('Will database track created_date and modified_date?', false);
+          $this->_config['timestamps'] = $this->_askYN('Will database track created_date and modified_date?', false);
         }
       }
 

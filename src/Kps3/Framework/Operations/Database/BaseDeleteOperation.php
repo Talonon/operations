@@ -3,7 +3,7 @@
 
     abstract class BaseDeleteOperation extends BaseEntityOperation {
 
-      protected function DoExecute() {
+      protected function doExecute() {
         $this->getTable()->where($this->GetMapper()->GetPrimaryKey(), $this->entity->GetID())->delete();
       }
     }

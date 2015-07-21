@@ -7,6 +7,7 @@
     use Kps3\Framework\Interfaces\SoftDeleteMapperInterface;
     use Kps3\Framework\Mappers\BaseDbMapper;
     use Kps3\Framework\Mappers\BaseMapperFactory;
+    use Kps3\Framework\Mappers\BaseSoftDeleteDbMapper;
     use Kps3\Framework\Models\BaseEntity;
 
     abstract class BaseEntityOperation extends BaseDbOperation {
@@ -29,16 +30,12 @@
       protected $entityType;
 
       /**
-       * @return BaseDbMapper|SoftDeleteMapperInterface
+       * @return BaseDbMapper|BaseSoftDeleteDbMapper
        * @throws InternalException
        */
       protected function getMapper() {
         if (!$this->_mapper) {
-          $mapper = \App::make($this->entityType . '.Mapper');
-          if (!$mapper instanceof SoftDeleteMapperInterface) {
-            throw new InternalException('Mapper for ' . $this->entityType . ' must implement SoftDeleteMapperInterface.');
-          }
-          $this->_mapper = $mapper;
+          $this->_mapper = \App::make($this->entityType . '.Mapper');
         }
         return $this->_mapper;
       }
