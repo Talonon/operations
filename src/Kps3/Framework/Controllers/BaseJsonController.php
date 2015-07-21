@@ -75,8 +75,8 @@
 
       /**
        * JSON Encodes the $thing and sends that string to the client with the pass status code.
-       * @param $entity Array or Object
-       * @param $statusCode int Any valid HTTP Response code.
+       * @param mixed $entity
+       * @param int $statusCode Any valid HTTP Response code.
        */
       protected function respondObject($entity, $statusCode = \Symfony\Component\HttpFoundation\Response::HTTP_OK) {
         $this->ensureXHR();
@@ -90,7 +90,6 @@
        */
       protected function respondJSON($json, $statusCode = SymphonyResponse::HTTP_OK) {
         $this->ensureXHR();
-        $this->addHeader('Content-Type', 'application/json', true);
         return new Response($json, $statusCode, $this->headers);
       }
 
