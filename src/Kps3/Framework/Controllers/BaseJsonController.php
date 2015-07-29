@@ -1,12 +1,13 @@
 <?php
   namespace Kps3\Framework\Controllers {
+
     use Illuminate\Http\Response;
     use Kps3\Framework\Exceptions\EntityNotFoundException;
     use Kps3\Framework\Exceptions\ExternalException;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
+    use Symfony\Component\HttpFoundation\Response as SymphonyResponse;
     use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
     use Symfony\Component\HttpKernel\Exception\HttpException;
-    use \Symfony\Component\HttpFoundation\Response as SymphonyResponse;
 
     /**
      * Sets up the basic most methods used by all of the Ajax controllers.
@@ -31,17 +32,13 @@
           } else {
             return $this->respondJSON($result, $this->resultCode);
           }
-        }
-        catch (ExternalException $eex) {
+        } catch (ExternalException $eex) {
           return $this->respondError($eex->getMessage(), SymphonyResponse::HTTP_BAD_REQUEST);
-        }
-        catch (EntityNotFoundException $enfex) {
+        } catch (EntityNotFoundException $enfex) {
           return $this->respondError($enfex->getMessage(), SymphonyResponse::HTTP_NOT_FOUND);
-        }
-        catch (HttpException $hex) {
+        } catch (HttpException $hex) {
           return $this->respondError($hex->getMessage(), $hex->getStatusCode());
-        }
-        catch (\Exception $ex) {
+        } catch (\Exception $ex) {
           return $this->dispatcherError($ex);
         }
       }
@@ -78,7 +75,7 @@
        * @param mixed $entity
        * @param int $statusCode Any valid HTTP Response code.
        */
-      protected function respondObject($entity, $statusCode = \Symfony\Component\HttpFoundation\Response::HTTP_OK) {
+      protected function respondObject($entity, $statusCode = SymphonyResponse::HTTP_OK) {
         $this->ensureXHR();
         return $this->respondJSON(json_encode($entity), $statusCode);
       }
@@ -90,7 +87,8 @@
        */
       protected function respondJSON($json, $statusCode = SymphonyResponse::HTTP_OK) {
         $this->ensureXHR();
-        return new Response($json, $statusCode, $this->headers);
+        return (new Response($json, $statusCode, $this->headers))
+          ->header('Content-Type', 'application/json');
       }
 
       /**
