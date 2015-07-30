@@ -19,6 +19,7 @@
         if (!$mapper instanceof BaseSoftDeleteDbMapper) {
           throw new InternalException('Mapper for ' . $this->entityType . ' must extend BaseSoftDeleteDbMapper.');
         }
+        return $mapper;
       }
 
       protected function getFields() {
