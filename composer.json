@@ -3,13 +3,12 @@
     "description": "",
     "authors": [
         {
-            "name": "Andy Muth",
-            "email": "andy@kps3.com"
+            "name": "KPS3",
+            "email": "web@kps3.com"
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "nesbot/carbon": "~1.19"
+        "laravel/framework": "5.1.*"
     },
     "autoload": {
         "psr-0": {
