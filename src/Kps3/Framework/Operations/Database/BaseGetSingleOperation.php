@@ -1,9 +1,10 @@
 <?php
   namespace Kps3\Framework\Operations\Database {
+
     use Illuminate\Database\Query\Builder;
     use Kps3\Framework\Context\BaseDbContext;
     use Kps3\Framework\Exceptions\EntityNotFoundException;
-    use Kps3\Framework\Models\BaseEntity;
+    use Kps3\Framework\Mappers\BaseSoftDeleteDbMapper;
 
     abstract class BaseGetSingleOperation extends BaseGetOperation {
 
@@ -19,6 +20,9 @@
 
       protected function buildQuery(Builder $select) {
         $select->where($this->GetMapper()->GetTableName() . '.' . $this->GetMapper()->GetPrimaryKey(), $this->id);
+        if ($this->getMapper() instanceof BaseSoftDeleteDbMapper) {
+          $select->whereNull($this->getMapper()->GetDeletedColumnName());
+        }
       }
 
       protected function buildResult() {
