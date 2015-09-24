@@ -28,7 +28,7 @@
 
       protected function buildQuery(Builder $builder) {
         if ($this->getMapper() instanceof BaseSoftDeleteDbMapper) {
-          $builder->whereNull($this->getMapper()->GetDeletedColumnName());
+          $builder->whereNull($this->getMapper()->GetTableName() . '.' . $this->getMapper()->GetDeletedColumnName());
         }
       }
 
