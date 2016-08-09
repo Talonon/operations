@@ -1,10 +1,14 @@
 {
-    "name": "kps3/framework",
+    "name": "talonon/operations",
     "description": "",
     "authors": [
         {
             "name": "KPS3",
             "email": "web@kps3.com"
+        },
+        {
+            "name": "Andy Muth",
+            "email": "andy@griffonco.com"
         }
     ],
     "require": {
@@ -12,7 +16,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Kps3\\Framework": "src/"
+            "Talonon\\Framework": "src/"
         }
     },
     "minimum-stability": "stable"
