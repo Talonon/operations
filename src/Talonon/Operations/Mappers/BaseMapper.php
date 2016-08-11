@@ -10,7 +10,7 @@
        * @param array $data
        * @return BaseEntity
        */
-      public function BuildMultiple(array $data) {
+      public function BuildMultiple(array $data) : BaseEntity {
         return $this->BuildSingle($data);
       }
 
@@ -18,7 +18,7 @@
        * @param array $data
        * @return BaseEntity
        */
-      abstract public function BuildSingle(array $data);
+      abstract public function BuildSingle(array $data) : BaseEntity;
     }
   }
 
