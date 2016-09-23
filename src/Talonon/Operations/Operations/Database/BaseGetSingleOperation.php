@@ -19,7 +19,17 @@
       protected $id;
 
       protected function buildQuery(Builder $select) {
-        $select->where($this->GetMapper()->GetTableName() . '.' . $this->GetMapper()->GetPrimaryKey(), $this->id);
+        $pk = $this->getMapper()->GetPrimaryKey();
+        if (is_array($pk)) {
+          $select->where(
+            function (Builder $inner) use ($pk) {
+              for ($x = 0, $c = count($pk); $x < $c; $x++) {
+                $inner->where($this->getMapper()->GetTableName() . '.' . $pk[$x], $this->id[$x] ?? null);
+              }
+            });
+        } else {
+          $select->where($this->getMapper()->GetTableName() . '.' . $this->getMapper()->GetPrimaryKey(), $this->id);
+        }
         if ($this->getMapper() instanceof BaseSoftDeleteDbMapper) {
           $select->whereNull($this->getMapper()->GetDeletedColumnName());
         }
