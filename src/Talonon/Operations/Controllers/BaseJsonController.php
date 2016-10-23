@@ -24,7 +24,7 @@
 
       protected function dispatch(callable $delegate) {
         try {
-          $result = $delegate();
+          $result = $delegate(\Request::instance());
           if ($result instanceof Response) {
             return $result;
           } else if (is_array($result) || $result instanceof \JsonSerializable) {
