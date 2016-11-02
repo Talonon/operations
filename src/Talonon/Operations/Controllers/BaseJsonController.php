@@ -2,6 +2,7 @@
   namespace Talonon\Operations\Controllers {
 
     use Illuminate\Http\Response;
+    use Illuminate\View\View;
     use Talonon\Operations\Exceptions\EntityNotFoundException;
     use Talonon\Operations\Exceptions\ExternalException;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -27,6 +28,9 @@
           $result = $delegate(\Request::instance());
           if ($result instanceof Response) {
             return $result;
+          }
+          else if ($result instanceof View) {
+            return response($result->render())->header('content-type', 'text/html');
           } else if (is_array($result) || $result instanceof \JsonSerializable) {
             return $this->respondObject($result, $this->resultCode);
           } else {
