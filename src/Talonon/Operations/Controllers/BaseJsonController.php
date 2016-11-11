@@ -1,6 +1,7 @@
 <?php
   namespace Talonon\Operations\Controllers {
 
+    use Illuminate\Http\RedirectResponse;
     use Illuminate\Http\Response;
     use Illuminate\View\View;
     use Talonon\Operations\Exceptions\EntityNotFoundException;
@@ -26,7 +27,7 @@
       protected function dispatch(callable $delegate) {
         try {
           $result = $delegate(\Request::instance());
-          if ($result instanceof Response) {
+          if ($result instanceof Response || $result instanceof RedirectResponse) {
             return $result;
           }
           else if ($result instanceof View) {
