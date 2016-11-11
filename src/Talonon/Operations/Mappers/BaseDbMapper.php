@@ -9,6 +9,17 @@
 
     abstract class BaseDbMapper extends BaseMapper {
 
+      protected $autoIncrementingID = true;
+
+      /**
+       * Sometimes tables don't use autoincrementing IDs, setting this to false will prevent the create from using
+       * the LAST_INSERT_ID and passing it to SetID().  By default its on because most tables will use it.
+       * @return boolean
+       */
+      public function GetAutoIncrementingID(): bool {
+        return $this->autoIncrementingID;
+      }
+
       /**
        * Gets an associated array of fields that are used to create a record in the database.  The key of the array
        * is the column name, the value of the element in the array is the value that will be saved in the database. Will

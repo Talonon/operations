@@ -12,14 +12,15 @@
       }
 
       protected function doExecute() {
-        $id = $this->getTable()->insertGetId(
+        $method = $this->getMapper()->GetAutoIncrementingID() ? 'insertGetId' : 'insert';
+        $id = $this->getTable()->$method(
           $this->getFields()
         );
-        $this->entity->SetId($id);
+        $this->getMapper()->GetAutoIncrementingID() && $this->entity->SetId($id);
       }
 
       protected function getFields() {
-        return $this->GetMapper()->GetCreateFields($this->entity);
+        return $this->getMapper()->GetCreateFields($this->entity);
       }
     }
   }
