@@ -1,6 +1,7 @@
 <?php
   namespace Talonon\Operations\Controllers {
     use Talonon\Operations\Exceptions\InternalException;
+    use Talonon\Operations\Presenters\DefaultControllerPresenter;
     use Talonon\Operations\Presenters\PresentableInterface;
     use Talonon\Operations\Presenters\PresentableTrait;
 
@@ -11,7 +12,7 @@
 
       use PresentableTrait;
 
-      protected $presenter = '\Talonon\Framework\Presenters\DefaultControllerPresenter';
+      protected $presenter = DefaultControllerPresenter::class;
 
       protected $wrapper = 'Layouts.Anonymous';
 
@@ -43,6 +44,7 @@
         $this->_settings['_csrf'] = csrf_token();
         $data['Settings'] = json_encode($this->_settings);
         !isset($data['Layout']) && $data['Layout'] = $this->wrapper;
+
         $data['Page'] = $this->Present();
         $data = array_merge($this->_data, $data);
         return \View::make($view, $data);
