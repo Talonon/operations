@@ -1,8 +1,6 @@
 <?php namespace Talonon\Operations\Controls;
 
 use Talonon\Operations\Context\BaseContext;
-use Tix\Admin\Internals\Models\Contexts\AnonymousContext;
-use Tix\Data\Contexts\TixContext;
 
 abstract class BaseControl {
 
@@ -16,7 +14,7 @@ abstract class BaseControl {
   protected $name = null;
   protected $class = null;
   /**
-   * @var BaseContext|TixContext|AnonymousContext
+   * @var BaseContext
    */
   protected $context;
   private $_value;
@@ -113,6 +111,6 @@ abstract class BaseControl {
    * @return mixed
    */
   protected function getValueFromInput() {
-
+    return null;
   }
 }
