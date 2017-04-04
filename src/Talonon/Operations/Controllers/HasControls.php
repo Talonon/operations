@@ -10,7 +10,7 @@ trait HasControls {
    */
   protected function addControl(string $name, BaseControl $control) {
     /** @var Collection $controls */
-    $controls = app('Tix.Views.Controls');
+    $controls = app('App.Views.Controls');
     $controls->put($name, $control->SetName($name)->LoadInputs());
   }
 
@@ -20,7 +20,7 @@ trait HasControls {
    */
   protected function getControl($name) {
     /** @var Collection $controls */
-    $controls = app('Tix.Views.Controls');
+    $controls = app('App.Views.Controls');
     return $controls->get($name, null);
   }
 }

@@ -1,12 +1,20 @@
 <?php
+
   namespace Talonon\Operations\Controllers {
 
     use Carbon\Carbon;
     use Illuminate\Routing\Controller;
     use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+    use Talonon\Operations\Context\BaseContext;
 
     abstract class BaseController extends Controller {
-
+      public function __construct() {
+        $this->context = app('Context');
+      }
+      /**
+       * @var BaseContext
+       */
+      protected $context;
       protected $headers = [];
 
       protected function addHeader($key, $value, $replace = false) {
@@ -17,13 +25,15 @@
       }
 
       protected function getString($key, $required = false) {
-        return $this->_get($key, $required, function($key) {
+        return $this->_get(
+          $key, $required, function ($key) {
           return \Input::get($key);
         });
       }
 
       protected function getInt($key, $required = false) {
-        return $this->_get($key, $required, function($key) {
+        return $this->_get(
+          $key, $required, function ($key) {
           $input = \Input::get($key);
           if ($input == null) return null;
           $val = intval($input, 10);
@@ -36,7 +46,8 @@
       }
 
       protected function getFloat($key, $required = false) {
-        return $this->_get($key, $required, function($key) {
+        return $this->_get(
+          $key, $required, function ($key) {
           $input = \Input::get($key);
           if ($input == null) return null;
           $val = floatval($input);
@@ -81,7 +92,8 @@
        * @return Carbon|null
        */
       protected function getDateTime($key, $format = null, $tz = null, $required = false) {
-        return $this->_get($key, $required, function($key) use ($format, $tz) {
+        return $this->_get(
+          $key, $required, function ($key) use ($format, $tz) {
           $input = \Input::get($key);
           return $input ? ($format ? Carbon::createFromFormat($format, $input) : Carbon::parse($input, $tz)) : null;
         });

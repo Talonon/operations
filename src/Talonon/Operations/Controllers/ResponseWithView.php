@@ -1,14 +1,10 @@
 <?php namespace Talonon\Operations\Controllers;
 
+use Talonon\Operations\Context\BaseContext;
 use Talonon\Operations\Exceptions\InternalException;
-use Talonon\Operations\Presenters\DefaultControllerPresenter;
-use Talonon\Operations\Presenters\PresentableTrait;
 
 trait ResponseWithView {
 
-  use PresentableTrait;
-
-  protected $presenter = DefaultControllerPresenter::class;
 
   protected $wrapper = 'Layouts.Anonymous';
 
@@ -56,7 +52,6 @@ trait ResponseWithView {
     $data['Settings'] = json_encode($this->_settings);
     !isset($data['Layout']) && $data['Layout'] = $this->wrapper;
 
-    $data['Page'] = $this->Present();
     $data = array_merge($this->_data, $data);
     return \View::make($view, $data);
   }
