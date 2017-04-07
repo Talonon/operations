@@ -31,8 +31,14 @@ abstract class BaseControl {
   }
 
   public final function render() {
+    if (strpos($this->template, '::') === false) {
+      $template = 'Controls::' . $this->template;
+    }
+    else {
+      $template = $this->template;
+    }
     return view()->make(
-      'Controls::' . $this->template, [
+      $template, [
                                       'value' => $this->_value,
                                       'label' => $this->label,
                                       'name'  => $this->name,
